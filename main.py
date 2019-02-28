@@ -51,6 +51,8 @@ def generateOutput(slideshow):
 def findNext(chain):
     h_id = 0
     v_id = 0
+    h_max_interest = 0
+    v_max_interest = 0
     for i in range(len(h_pics)):
         interest = score(chain[-1], h_pics[i - 1])
         if interest >= h_max_interest:
