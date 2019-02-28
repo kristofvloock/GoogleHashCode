@@ -60,11 +60,12 @@ def findNext(chain):
 
             h_id = i
 
-    for j in range(len(v_pics)):
-        interest = score(chain[-1], h_pics[i - 1])
-        if interest >= v_max_interest:
-            v_max_interest = interest
-            v_id = i
+    if len(v_pics) >= 2:
+        for j in range(len(v_pics)):
+            interest = score(chain[-1], h_pics[i - 1])
+            if interest >= v_max_interest:
+                v_max_interest = interest
+                v_id = i
     if v_max_interest < h_max_interest:
         chain.append(h_pics[h_id])
         h_pics.pop(h_id)
@@ -85,7 +86,7 @@ def findNextVertical(chain):
         previousvertical = chain[-1]
         concat_pic = concatTags(previousvertical, v_pics[i])
         interest = score(previous, concat_pic)
-        if interest > max_interest:
+        if interest >= max_interest:
             max_interest = interest
             new_picture = concat_pic
     chain.append(new_picture)
