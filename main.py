@@ -75,7 +75,7 @@ def findNext(chain):
 
 
 def concatTags(Img1, Img2):
-    return {"id": str(Img1["id"] + " " + str(Img2["id"])), "o": "H", "nb_tags": len(
+    return {"id": str(Img1["id"]) + " " + str(Img2["id"]), "o": "H", "nb_tags": len(
         Img1["tags"].union(Img2["tags"])), "tags": Img1["tags"].union(Img2["tags"])}
 
 def findNextVertical(chain):
