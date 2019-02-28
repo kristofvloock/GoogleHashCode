@@ -37,5 +37,11 @@ def total_score(photos):
         t_score += score(photos[i], photos[i+1])
     return t_score
 
+def generateOutput(slideshow):
+    f = open('submission.txt', 'w')
+    f.write(str(len(slideshow)) + '\n')
+    for p in slideshow:
+        f.write(str(p['id'] + '\n'))
+
 print(v_pics)
 print(h_pics)
