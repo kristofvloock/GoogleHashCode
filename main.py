@@ -22,6 +22,7 @@ for pic in data:
 v_pics = [pic for pic in pics if pic['o'] == 'V']
 h_pics = [pic for pic in pics if pic['o'] == 'H']
 
+
 def score(Img1, Img2):
     identical = 0
     for tag in Img1["tags"]:
@@ -53,19 +54,21 @@ def findNext(chain):
     v_id = 0
     h_max_interest = 0
     v_max_interest = 0
-    for i in range(len(h_pics)):
-        interest = score(chain[-1], h_pics[i - 1])
-        if interest >= h_max_interest:
-            h_max_interest = interest
+    if len(h_pics) > 0:
+        for i in range(len(h_pics)):
+            interest = score(chain[-1], h_pics[i - 1])
+            if interest >= h_max_interest:
+                h_max_interest = interest
 
-            h_id = i
+                h_id = i
 
     if len(v_pics) >= 2:
         for j in range(len(v_pics)):
-            interest = score(chain[-1], h_pics[i - 1])
+            interest = score(chain[-1], v_pics[j - 1])
             if interest >= v_max_interest:
                 v_max_interest = interest
-                v_id = i
+                v_id = j
+
     if v_max_interest < h_max_interest:
         chain.append(h_pics[h_id])
         h_pics.pop(h_id)
@@ -89,6 +92,7 @@ def findNextVertical(chain):
         if interest >= max_interest:
             max_interest = interest
             new_picture = concat_pic
+    del chain[-1]
     chain.append(new_picture)
 
     return chain
@@ -97,7 +101,7 @@ def createChain():
     chain = [h_pics[0]]
     h_pics.pop(0)
 
-    while len(h_pics) != 0 and len(v_pics) > 1:
+    while len(h_pics) != 0 or len(v_pics) > 1:
 
         # find the next picture with the highest score
         chain = findNext(chain)
@@ -109,5 +113,7 @@ def createChain():
     return chain
 
 slide = createChain()
+print(h_pics)
+print(v_pics)
 generateOutput(slide)
 print(total_score(slide))
