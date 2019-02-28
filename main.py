@@ -45,5 +45,6 @@ def generateOutput(slideshow):
             f.write(str(p['id']) + '\n')
         else:
             f.write(str(p['id']))
+    f.close()
 
 generateOutput(pics)
