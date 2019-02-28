@@ -37,5 +37,19 @@ def total_score(photos):
 
 # print(list(combinations([i for i in pics if i['o'] == 'V'], 2)))
 
+print("GEnerating list")
 all_combos = list(permutations(pics))
+max_score = 0
+i=0
 
+print("Start forcing")
+for combo in all_combos:
+    print(i)
+    current_score = total_score(combo)
+    if current_score > max_score:
+        max_score = current_score
+        best = combo
+    i += 1
+
+print("max score", max_score)
+print(best)
