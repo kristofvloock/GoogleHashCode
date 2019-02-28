@@ -3,7 +3,7 @@ from itertools import permutations
 from itertools import combinations
 
 
-f = open('a_example.txt', 'r')
+f = open('c_memorable_moments.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -50,10 +50,12 @@ def generateOutput(slideshow):
 
 
 def findNext(chain):
+    print(len(v_pics))
+    print(len(h_pics))
     h_id = 0
     v_id = 0
-    h_max_interest = 0
-    v_max_interest = 0
+    h_max_interest = -1
+    v_max_interest = -1
     if len(h_pics) > 0:
         for i in range(len(h_pics)):
             interest = score(chain[-1], h_pics[i - 1])
@@ -85,14 +87,17 @@ def concatTags(Img1, Img2):
 def findNextVertical(chain):
     previous = chain[-2]
     max_interest = 0
+    id = 0
     for i in range(len(v_pics)):
         previousvertical = chain[-1]
         concat_pic = concatTags(previousvertical, v_pics[i])
         interest = score(previous, concat_pic)
         if interest >= max_interest:
+            id = i
             max_interest = interest
             new_picture = concat_pic
     del chain[-1]
+    del v_pics[id]
     chain.append(new_picture)
 
     return chain
