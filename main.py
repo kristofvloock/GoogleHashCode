@@ -3,7 +3,7 @@ from itertools import permutations
 from itertools import combinations
 
 
-f = open('b_lovely_landscapes.txt', 'r')
+f = open('a_example.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -19,6 +19,8 @@ for pic in data:
     pics.append(d)
     id += 1
 
+v_pics = [pic for pic in pics if pic['o'] == 'V']
+h_pics = [pic for pic in pics if pic['o'] == 'H']
 
 def score(Img1, Img2):
     identical = 0
@@ -35,21 +37,5 @@ def total_score(photos):
         t_score += score(photos[i], photos[i+1])
     return t_score
 
-# print(list(combinations([i for i in pics if i['o'] == 'V'], 2)))
-
-print("GEnerating list")
-all_combos = list(permutations(pics))
-max_score = 0
-i=0
-
-print("Start forcing")
-for combo in all_combos:
-    print(i)
-    current_score = total_score(combo)
-    if current_score > max_score:
-        max_score = current_score
-        best = combo
-    i += 1
-
-print("max score", max_score)
-print(best)
+print(v_pics)
+print(h_pics)
