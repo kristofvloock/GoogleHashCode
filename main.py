@@ -3,7 +3,7 @@ from itertools import permutations
 from itertools import combinations
 
 
-f = open('e_shiny_selfies.txt', 'r')
+f = open('a_example.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -94,7 +94,7 @@ def createChain():
     chain = [h_pics[0]]
     h_pics.pop(0)
 
-    while len(h_pics) == 0 and len(v_pics) <= 1:
+    while len(h_pics) != 0 and len(v_pics) > 1:
 
         # find the next picture with the highest score
         chain = findNext(chain)
