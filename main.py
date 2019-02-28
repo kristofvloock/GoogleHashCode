@@ -3,7 +3,7 @@ from itertools import permutations
 from itertools import combinations
 
 
-f = open('a_example.txt', 'r')
+f = open('e_shiny_selfies.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -41,7 +41,9 @@ def generateOutput(slideshow):
     f = open('submission.txt', 'w')
     f.write(str(len(slideshow)) + '\n')
     for p in slideshow:
-        f.write(str(p['id'] + '\n'))
+        if p != slideshow[-1]:
+            f.write(str(p['id']) + '\n')
+        else:
+            f.write(str(p['id']))
 
-print(v_pics)
-print(h_pics)
+generateOutput(pics)
