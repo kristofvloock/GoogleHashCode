@@ -1,8 +1,9 @@
 import numpy as np
 from itertools import permutations
+from itertools import combinations
 
 
-f = open('a_example.txt', 'r')
+f = open('b_lovely_landscapes.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -34,6 +35,7 @@ def total_score(photos):
         t_score += score(photos[i], photos[i+1])
     return t_score
 
+# print(list(combinations([i for i in pics if i['o'] == 'V'], 2)))
 
 all_combos = list(permutations(pics))
 
