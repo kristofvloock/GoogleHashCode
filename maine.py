@@ -3,7 +3,7 @@ from itertools import permutations
 from itertools import combinations
 
 
-f = open('d_pet_pictures.txt', 'r')
+f = open('e_shiny_selfies.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -39,7 +39,7 @@ def total_score(photos):
     return t_score
 
 def generateOutput(slideshow):
-    f = open('submissiond.txt', 'w')
+    f = open('submissione.txt', 'w')
     f.write(str(len(slideshow)) + '\n')
     for p in slideshow:
         if p != slideshow[-1]:
@@ -103,8 +103,12 @@ def findNextVertical(chain):
     return chain
 
 def createChain():
-    chain = [h_pics[0]]
-    h_pics.pop(0)
+    if len(h_pics) != 0:
+        chain = [h_pics[0]]
+        h_pics.pop(0)
+    else:
+        chain = [v_pics[0]]
+        v_pics.pop(0)
 
     while len(h_pics) != 0 or len(v_pics) > 1:
 

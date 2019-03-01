@@ -39,7 +39,7 @@ def total_score(photos):
     return t_score
 
 def generateOutput(slideshow):
-    f = open('submissiond.txt', 'w')
+    f = open('submissionv2.txt', 'w')
     f.write(str(len(slideshow)) + '\n')
     for p in slideshow:
         if p != slideshow[-1]:
@@ -106,7 +106,9 @@ def createChain():
     chain = [h_pics[0]]
     h_pics.pop(0)
 
-    while len(h_pics) != 0 or len(v_pics) > 1:
+    # while len(h_pics) != 0 or len(v_pics) > 1:
+    for i in range(100):
+        print(i)
 
         # find the next picture with the highest score
         chain = findNext(chain)
