@@ -2,8 +2,7 @@ import numpy as np
 from itertools import permutations
 from itertools import combinations
 
-
-f = open('c_memorable_moments.txt', 'r')
+f = open('e_shiny_selfies.txt', 'r')
 
 N = int(f.readline().strip('\n'))
 print(N)
@@ -46,12 +45,11 @@ def generateOutput(slideshow):
             f.write(str(p['id']) + '\n')
         else:
             f.write(str(p['id']))
+
     f.close()
 
 
 def findNext(chain):
-    print(len(v_pics))
-    print(len(h_pics))
     h_id = 0
     v_id = 0
     h_max_interest = -1
@@ -103,10 +101,16 @@ def findNextVertical(chain):
     return chain
 
 def createChain():
-    chain = [h_pics[0]]
-    h_pics.pop(0)
+    if len(h_pics) != 0:
+        chain = [h_pics[0]]
+        h_pics.pop(0)
+    else:
+        chain = [v_pics[0]]
+        v_pics.pop(0)
 
     while len(h_pics) != 0 or len(v_pics) > 1:
+
+        if len(chain) % 100 == 0
 
         # find the next picture with the highest score
         chain = findNext(chain)
@@ -118,6 +122,7 @@ def createChain():
     return chain
 
 slide = createChain()
+
 print(h_pics)
 print(v_pics)
 generateOutput(slide)
