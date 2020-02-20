@@ -19,9 +19,9 @@ for l in range(L):
             'rate': rate,
             'books': books,
             'scan_days': int(ceil(nob/rate)),
-            'sign_order': l,
-            'amo_scanned_books': 3,
-            'scanned_books': books[:3]
+            'sign_order': None,
+            'amo_scanned_books': None,
+            'scanned_books': None
         }
         libs.append(lib)
 
