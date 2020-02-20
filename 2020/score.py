@@ -3,7 +3,7 @@ from math import log
 def lib_score(D, day, libs, avg_scores):
     library_scores = []
     for i,l in enumerate(libs):
-        p_occupied = l['scan_days']/(D - day)
+        p_occupied = l['scan_days']/(D - day + 1)
         work_performed = l['nob']/max(p_occupied,1)
         library_scores.append(work_performed*avg_scores[i]/log(l['sup'] + 1))
     return library_scores
