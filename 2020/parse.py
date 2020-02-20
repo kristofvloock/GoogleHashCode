@@ -32,7 +32,7 @@ signup_period = -1
 lib_signup = []
 ready_to_scan = []
 sorted_ready_libs = []
-signed_libs = libs
+signed_libs = libs[:]
 for day in range(1, D + 1):
     if signup_period == 0:
         in_signup = False
@@ -48,12 +48,10 @@ for day in range(1, D + 1):
         lib_scores = lib_score(D, day, signed_libs, avg_scores)
 
         sorted_idx = np.argsort(lib_scores)[::-1]
-        lib_to_sign_up = sorted_idx[0]
-        signed_libs.pop(sorted_idx[0])
+        lib_to_sign_up = signed_libs.pop(sorted_idx[0])['id']
         lib_signup.append(lib_to_sign_up)
         signup_period = libs[lib_to_sign_up]['sup']
         in_signup = True
-        print(sorted_idx)
         
     for i,lib in enumerate(ready_to_scan):
         scan_rate = libs[lib]['rate']
@@ -63,9 +61,9 @@ for day in range(1, D + 1):
                 ready_to_scan = ready_to_scan[:i]+ready_to_scan[i+1:]
                 i -= 1
                 break
-            scanned.append(sorted_ready_libs[i].pop(-1))
+
+            scanned.append(sorted_ready_libs[lib].pop(-1))
         libs[lib]['scanned_books'] += scanned
-        libs[lib]['amo_scanned_books'] += 1
     signup_period -= 1
 
 used_libs = [libs[i] for i in lib_signup]
@@ -77,7 +75,7 @@ def generateOutput(output_libs):
     f.write(str(len(output_libs))+ '\n')
     
     for out_lib in output_libs:
-        f.write(str(out_lib['id']) + ' ' + str(out_lib['amo_scanned_books']) + '\n')
+        f.write(str(out_lib['id']) + ' ' + str(len(out_lib['scanned_books'])) + '\n')
         out_books = "".join([str(b) + ' ' for b in out_lib['scanned_books']])[:-1]
         f.write(out_books + '\n')
     f.close()
