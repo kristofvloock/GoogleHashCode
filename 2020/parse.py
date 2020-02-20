@@ -42,6 +42,7 @@ for day in range(1, D + 1):
         book_score_list = [book_scores[i] for i in books]
         sorted_books = [book for _,book in sorted(zip(book_score_list,books))]
         sorted_ready_libs.append(sorted_books)
+        libs[lib_signup[-1]]['books'] = sorted_books
         
     if not in_signup and len(lib_signup) != len(libs):
         avg_scores = avg_score(signed_libs, book_scores)
@@ -61,8 +62,7 @@ for day in range(1, D + 1):
                 ready_to_scan = ready_to_scan[:i]+ready_to_scan[i+1:]
                 i -= 1
                 break
-
-            scanned.append(sorted_ready_libs[lib].pop(-1))
+            scanned.append(libs[lib]['books'].pop(-1))
         libs[lib]['scanned_books'] += scanned
     signup_period -= 1
 

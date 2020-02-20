@@ -5,7 +5,7 @@ def lib_score(D, day, libs, avg_scores):
     for i,l in enumerate(libs):
         p_occupied = l['scan_days']/(D - day)
         work_performed = l['nob']/max(p_occupied,1)
-        library_scores.append(work_performed*avg_scores[i]/log(l['sup']))
+        library_scores.append(work_performed*avg_scores[i]/log(l['sup'] + 1))
     return library_scores
 
 def avg_score(libs,book_scores):
