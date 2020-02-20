@@ -58,7 +58,7 @@ for day in range(1, D + 1):
         scan_rate = libs[lib]['rate']
         scanned = []
         for j in range(scan_rate):
-            if len(sorted_ready_libs[i]) < j:
+            if len(libs[lib]['books']) == 0:
                 ready_to_scan = ready_to_scan[:i]+ready_to_scan[i+1:]
                 i -= 1
                 break
