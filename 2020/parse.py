@@ -32,6 +32,7 @@ signup_period = -1
 lib_signup = []
 ready_to_scan = []
 sorted_ready_libs = []
+signed_libs = libs
 for day in range(1, D + 1):
     if signup_period == 0:
         in_signup = False
@@ -43,19 +44,25 @@ for day in range(1, D + 1):
         sorted_ready_libs.append(sorted_books)
         
     if not in_signup and len(lib_signup) != len(libs):
-        avg_scores = avg_score(libs, book_scores)
-        lib_scores = lib_score(D, day, libs, avg_scores)
+        avg_scores = avg_score(signed_libs, book_scores)
+        lib_scores = lib_score(D, day, signed_libs, avg_scores)
 
         sorted_idx = np.argsort(lib_scores)[::-1]
-        lib_signup.append(sorted_idx[0])
-        signup_period = libs[sorted_idx[0]]['sup']
+        lib_to_sign_up = sorted_idx[0]
+        signed_libs.pop(sorted_idx[0])
+        lib_signup.append(lib_to_sign_up)
+        signup_period = libs[lib_to_sign_up]['sup']
         in_signup = True
+        print(sorted_idx)
         
     for i,lib in enumerate(ready_to_scan):
         scan_rate = libs[lib]['rate']
         scanned = []
-        print(sorted_ready_libs)
-        for i in range(scan_rate):
+        for j in range(scan_rate):
+            if len(sorted_ready_libs[i]) < j:
+                ready_to_scan = ready_to_scan[:i]+ready_to_scan[i+1:]
+                i -= 1
+                break
             scanned.append(sorted_ready_libs[i].pop(-1))
         libs[lib]['scanned_books'] += scanned
         libs[lib]['amo_scanned_books'] += 1
