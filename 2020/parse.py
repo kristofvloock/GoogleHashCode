@@ -1,5 +1,7 @@
 from math import ceil
-filename = 'a_example.txt'
+import sys
+
+filename = sys.argv[1]
 
 f = open(filename, 'r')
 B, L, D = [int(i) for i in f.readline().strip('\n').split(' ')]
@@ -33,3 +35,5 @@ def generateOutput(output_libs):
         out_books = "".join([str(b) + ' ' for b in out_lib['scanned_books']])[:-1]
         f.write(out_books + '\n')
     f.close()
+
+generateOutput(libs)
