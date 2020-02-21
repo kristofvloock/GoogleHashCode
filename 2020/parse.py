@@ -9,7 +9,7 @@ f = open(filename, 'r')
 B, L, D = [int(i) for i in f.readline().strip('\n').split(' ')]
 book_scores = [int(i) for i in f.readline().strip('\n').split(' ')]
 
-libs = [] ###################
+libs = []
 for l in range(L):
         nob, sup, rate =  [int(i) for i in f.readline().strip('\n').split(' ')]
         books = [int(i) for i in f.readline().strip('\n').split(' ')]
